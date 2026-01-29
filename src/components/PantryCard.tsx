@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Draggable } from '@hello-pangea/dnd';
-import { Trash2, X } from 'lucide-react';
+import { Trash2, X, ChevronDown, ChevronUp } from 'lucide-react';
 import type { Meal } from '../types';
 
 type Props = {
@@ -72,12 +72,15 @@ export function PantryCard({ meal, remaining, index, onEdit, onDelete }: Props) 
               </label>
               <label>
                 Portions
-                <input
-                  type="number"
-                  value={editPortions}
-                  onChange={e => setEditPortions(Math.max(1, parseInt(e.target.value) || 1))}
-                  min={1}
-                />
+                <div className="stepper">
+                  <button type="button" className="stepper-btn" onClick={() => setEditPortions(p => Math.max(1, p - 1))} disabled={editPortions <= 1}>
+                    <ChevronDown size={18} />
+                  </button>
+                  <span className="stepper-value">{editPortions}</span>
+                  <button type="button" className="stepper-btn" onClick={() => setEditPortions(p => p + 1)}>
+                    <ChevronUp size={18} />
+                  </button>
+                </div>
               </label>
               <button type="submit" className="btn-primary">Save</button>
             </form>

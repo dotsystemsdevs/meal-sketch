@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { X } from 'lucide-react';
+import { X, ChevronDown, ChevronUp } from 'lucide-react';
 
 type Props = {
   onAdd: (name: string, portions: number) => void;
@@ -36,12 +36,15 @@ export function AddMealModal({ onAdd, onClose }: Props) {
           </label>
           <label>
             Portions
-            <input
-              type="number"
-              value={portions}
-              onChange={e => setPortions(Math.max(1, parseInt(e.target.value) || 1))}
-              min={1}
-            />
+            <div className="stepper">
+              <button type="button" className="stepper-btn" onClick={() => setPortions(p => Math.max(1, p - 1))} disabled={portions <= 1}>
+                <ChevronDown size={18} />
+              </button>
+              <span className="stepper-value">{portions}</span>
+              <button type="button" className="stepper-btn" onClick={() => setPortions(p => p + 1)}>
+                <ChevronUp size={18} />
+              </button>
+            </div>
           </label>
           <button type="submit" className="btn-primary">Add</button>
         </form>

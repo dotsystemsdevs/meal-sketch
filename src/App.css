@@ -586,14 +586,52 @@ body {
   box-shadow: 1px 1px 0 var(--shadow-color);
 }
 
-/* ── Number input: hide browser spinners ── */
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+/* ── Stepper ── */
+.stepper {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  background: #fff;
+  box-shadow: 2px 2px 0 var(--shadow-color);
+  overflow: hidden;
 }
-input[type="number"] {
-  -moz-appearance: textfield;
+
+.stepper-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--card);
+  border: none;
+  padding: 6px 10px;
+  cursor: pointer;
+  color: var(--ink);
+  transition: background 0.1s;
+}
+
+.stepper-btn:hover:not(:disabled) {
+  background: var(--accent-soft);
+}
+
+.stepper-btn:active:not(:disabled) {
+  background: var(--accent);
+  color: var(--card);
+}
+
+.stepper-btn:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+}
+
+.stepper-value {
+  font-family: 'Patrick Hand', cursive;
+  font-size: 1.1rem;
+  min-width: 2.5rem;
+  text-align: center;
+  color: var(--ink);
+  padding: 4px 0;
+  user-select: none;
 }
 
 /* ── Touch devices: always show remove buttons ── */
